@@ -37,6 +37,20 @@ def default_learning_rate_B_exponential(dimensions):
     return 0.005 * (9 + 3. * np.log(dimensions)) / (5. * dimensions * np.sqrt(dimensions))
 
 
+def default_population_size_elitist(dimensions):
+    """
+    """
+    return 10
+
+
+def default_learning_rates_sigma_elitist(dimensions):
+    return 1/5 * dimensions**(-3/2.), dimensions**(-3/2.)
+
+
+def default_learning_rate_A_elitist(dimensions):
+    return 1/4. * dimensions**(-3/2.)
+
+    
 def utility(fitness):
     """
     Utility function for fitness shaping.
