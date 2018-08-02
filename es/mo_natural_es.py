@@ -72,15 +72,12 @@ def optimize(func, cov,
     s = rng.normal(0, 1, size=(population_size, N))
     mu = mu + sigma * np.array([np.dot(A[i], s[i]) for i in range(population_size)])
     while True:
-        # assert(abs(np.linalg.det(A) - 1.) < 1e-12), 'determinant of root '
-        # 'of covariance matrix unequal one'
-
         s = rng.normal(0, 1, size=(population_size, N))
         mu_prime = mu + sigma * np.array([np.dot(A[i], s[i]) for i in range(population_size)])
         sigma_prime = sigma
         A_prime = A
         z = np.array([mu, mu_prime])
-#        import pdb; pdb.set_trace()
+
         z_flattened = z.reshape(-1, np.shape(mu)[1])
         fitness = np.array([func(zi) for zi in z_flattened]).reshape(2, population_size, -1)
         fitness_flattened = fitness.reshape(-1, fitness.shape[-1])
