@@ -35,7 +35,8 @@ def optimize(func, mu, sigma,
     history_mu = []
     history_sigma = []
     history_pop = []
-
+    history_fitness = []
+    
     while True:
         s = rng.normal(0, 1, size=(population_size, *np.shape(mu)))
         z = mu + sigma * s
@@ -65,6 +66,7 @@ def optimize(func, mu, sigma,
             history_mu.append(mu.copy())
             history_sigma.append(sigma.copy())
             history_pop.append(z.copy())
+            history_fitness.append(fitness)
 
         generation += 1
         print(f"Generation {generation}: {np.median(fitness)}")
@@ -72,4 +74,4 @@ def optimize(func, mu, sigma,
         if generation > max_iter or np.all(sigma < 1e-10):
             break
 
-    return {'mu': mu, 'sigma': sigma, 'history_mu': history_mu, 'history_sigma': history_sigma, 'history_pop': history_pop}
+    return {'mu': mu, 'sigma': sigma, 'history_mu': history_mu, 'history_sigma': history_sigma, 'history_pop': history_pop, 'history_fitness': history_fitness}
