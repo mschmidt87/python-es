@@ -67,7 +67,7 @@ def optimize(func, mu, sigma,
             history_pop.append(z.copy())
 
         generation += 1
-
+        print(f"Generation {generation}: {np.median(fitness)}")
         # exit if max iterations reached
         if generation > max_iter or np.all(sigma < 1e-10):
             break
