@@ -5,7 +5,7 @@ from . import lib
 
 def optimize(func, mu, sigma,
              learning_rate_mu=None, learning_rate_sigma=None, population_size=None,
-             sigma_lower_bound=1e-10, max_iter=2000,
+             sigma_lower_bound=1e-10, start_iter=0, max_iter=2000,
              fitness_shaping=True, mirrored_sampling=True, record_history=False,
              rng=None):
     """
@@ -31,7 +31,7 @@ def optimize(func, mu, sigma,
     elif isinstance(rng, int):
         rng = np.random.RandomState(seed=rng)
 
-    generation = 0
+    generation = start_iter
     history_mu = []
     history_sigma = []
     history_pop = []
@@ -69,7 +69,7 @@ def optimize(func, mu, sigma,
             history_fitness.append(fitness)
 
         generation += 1
-        print(f"Generation {generation}: {np.median(fitness)}")
+        print(f"Generation {generation}: {np.median(fitness)}, {np.mean(fitness)}, {np.std(fitness)}")
         # exit if max iterations reached
         if generation > max_iter or np.all(sigma < 1e-10):
             break
